@@ -1,0 +1,13 @@
+@import model.Product
+@( products: List[Product])(implicit messages: Messages)
+
+@first(Messages("application.name")){
+    <h1>Blleeeee</h1>
+
+    <dl class="products">
+        @for(prod <- products){
+            <dt>@prod.name</dt>
+            <dd>@prod.desc</dd>
+        }
+    </dl>
+}

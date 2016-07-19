@@ -1,0 +1,21 @@
+@import model.Product
+@(product: Product)(implicit messages: Messages)
+
+@first(Messages("product.details", product.name)) {
+    <h2>@tags.barcode(product.ean)
+        @Messages("product.details", product.name)
+    </h2>
+
+    <dl class="dl-horizontal">
+        <dt>@Messages("product.id"):</dt>
+        <dd>@product.ean</dd>
+
+        <dt>@Messages("product.name"):</dt>
+        <dd>@product.name</dd>
+
+        <dt>@Messages("product.desc"):</dt>
+        <dd>@product.desc</dd>
+
+    </dl>
+
+}

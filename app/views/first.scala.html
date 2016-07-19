@@ -1,0 +1,35 @@
+@(title: String)(content: Html)(implicit messages: Messages)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@title</title>
+            <!-- Bootstrap core CSS -->
+        <link href="@routes.Assets.versioned("/lib/bootstrap/css/bootstrap.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("/stylesheets/main.css")" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="screenshot">
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="@routes.ProductController.listOfProds()">
+                        @Messages("application.name")
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                @content
+                @debug()
+            </div>
+        </div>
+
+
+            <!--custom script-->
+        <script src="@routes.Assets.versioned("javascripts/hello.js")"></script>
+            <!--boostrap and jquery statics-->
+        <script src="@routes.Assets.versioned("/lib/jquery/jquery.min.js")"></script>
+        <script src="@routes.Assets.versioned("/lib/bootstrap/js/bootstrap.min.js")"></script>
+    </body>
+</html>
