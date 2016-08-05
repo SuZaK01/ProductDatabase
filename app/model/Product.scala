@@ -8,6 +8,10 @@ case class Product(ean: Long, name: String, desc: String)
 object Product {
   def findByEan(ean: Long) = products.find(_.ean == ean)
 
+  def add(product: Product): Unit ={
+    products = products + product
+  }
+
   var products = Set(
     Product(5010255079763L, "Paperclips Large",
       "Large Plain Pack of 1000"),
@@ -23,3 +27,15 @@ object Product {
 
   def findAll = products.toList.sortBy(_.ean)
 }
+
+
+
+case class Warehouse(id: Long, name: String)
+
+object Warehouse{
+
+}
+
+
+case class StockItem(id:Long, productId: Long, warehouseId: Long, quantity: Long)
+

@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(implicit messages: Messages)
+@(title: String)(content: Html)(implicit messages: Messages, flash: play.api.mvc.Flash)
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,20 @@
                 </div>
             </div>
             <div class="container">
+                @if(flash.get("success").isDefined) {
+                    <div class="alert alert-success">
+                    @flash.get("success")
+                    </div>
+                }
+                @if(flash.get("error").isDefined) {
+                    <div class="alert alert-error">
+                    @flash.get("error")
+                    </div>
+                }
+
                 @content
+
+
                 @debug()
             </div>
         </div>

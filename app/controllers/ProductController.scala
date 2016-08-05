@@ -4,8 +4,9 @@ import javax.inject.Inject
 
 import model.Product
 import play.api.data.{Form, Forms}
-import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, Controller}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import play.api.mvc.{Action, Controller, Flash}
+
 
 /**
   * Created by lukasz on 19.07.16.
@@ -13,7 +14,7 @@ import play.api.mvc.{Action, Controller}
 
 
 class ProductController @Inject()(val messagesApi: MessagesApi)
-  extends Controller with I18nSupport{
+  extends Controller with I18nSupport {
 
   private val productForm: Form[Product] = Form(
     Forms.mapping(
@@ -34,4 +35,23 @@ class ProductController @Inject()(val messagesApi: MessagesApi)
     } getOrElse (NotFound)
   }
 
+  def newProduct = Action { implicit req => {
+    val form = if (req.flash.get("error").isDefined) productForm.bind(req.flash.data) else productForm
+    Ok(views.html.products.editProduct(form))
+  }
+  }
+
+  def save = Action { implicit req =>
+    val newProductForm = productForm.bindFromRequest()
+
+    newProductForm.fold(
+      hasErrors = form => Redirect(routes.ProductController.newProduct()).flashing(Flash(form.data) + ("error" -> Messages("validation.error"))),
+      success = { newProduct =>
+        Product.add(newProduct)
+        val message = Messages("product.new.success") + ": " + newProduct.name
+        Redirect(routes.ProductController.show(newProduct.ean)).flashing("success" -> message)
+      }
+    )
+  }
 }
+

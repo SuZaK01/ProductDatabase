@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(implicit messages: Messages)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,21 @@
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </head>
     <body>
+
+        <div class="screenshot">
+            <div class="navbar navbar-fixed-top">
+                <div class="container">
+                    <a class="brand" href="@routes.ProductController.listOfProds()">@Messages("application.name")</a>
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li class="active">
+                            <a href="@routes.ProductController.listOfProds()">@Messages("product.list")</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         @* And here's where we render the `Html` object containing
          * the page content. *@
         @content
