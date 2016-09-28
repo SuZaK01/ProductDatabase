@@ -1,16 +1,36 @@
 package model
 
+import slick.driver.H2Driver.api._
+import slick.lifted.Tag
+
+
 /**
   * Created by lukasz on 19.07.16.
   */
-case class Product(ean: Long, name: String, desc: String)
+case class Product(ean: Long,
+                   name: String,
+                   desc: String) {
+
+}
+
+
+
 
 object Product {
   def findByEan(ean: Long) = products.find(_.ean == ean)
 
-  def add(product: Product): Unit ={
+  def add(product: Product): Unit = {
     products = products + product
   }
+
+  //  lazy val productsSlick = TableQuery[Product]
+
+  /*  val setup = DBIO.seq(
+      productsSlick ++= (
+        (5010255079763L, "Paperclips Large","Large Plain Pack of 1000"),
+        (5018206244666L, "Giant Paperclips", "Giant Plain 51mm 100 pack")
+    )*/
+
 
   var products = Set(
     Product(5010255079763L, "Paperclips Large",
@@ -26,16 +46,17 @@ object Product {
   )
 
   def findAll = products.toList.sortBy(_.ean)
-}
 
+  def tupled = (Product.apply _).tupled
+}
 
 
 case class Warehouse(id: Long, name: String)
 
-object Warehouse{
+object Warehouse {
 
 }
 
 
-case class StockItem(id:Long, productId: Long, warehouseId: Long, quantity: Long)
+case class StockItem(id: Long, productId: Long, warehouseId: Long, quantity: Long)
 

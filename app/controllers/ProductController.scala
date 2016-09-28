@@ -3,18 +3,26 @@ package controllers
 import javax.inject.Inject
 
 import model.Product
+import play.api.Play
 import play.api.data.{Form, Forms}
+import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.{Action, Controller, Flash}
+import play.db.NamedDatabase
+import slick.driver.JdbcProfile
 
 
 /**
   * Created by lukasz on 19.07.16.
   */
 
+/*
+class ProductController @Inject()(val messagesApi: MessagesApi, val dbConfigProvider: DatabaseConfigProvider)
+  extends Controller with I18nSupport {*/
 
 class ProductController @Inject()(val messagesApi: MessagesApi)
   extends Controller with I18nSupport {
+
 
   private val productForm: Form[Product] = Form(
     Forms.mapping(
