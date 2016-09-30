@@ -16,6 +16,12 @@ libraryDependencies ++= Seq(
   ws,
   "org.webjars" %% "webjars-play" % "2.5.0",
   "com.adrianhurt" %% "play-bootstrap" % "1.1-P25-B3",
+
+  //filters and authentication
+  //  filters,
+  "be.objectify" %% "deadbolt-scala" % "2.5.0",
+  "org.mindrot" % "jbcrypt" % "0.3m",
+
   //barcode generator
   "net.sf.barcode4j" % "barcode4j" % "2.1",
   //slick

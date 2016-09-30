@@ -53,9 +53,7 @@ object Product {
 
 case class Warehouse(id: Long, name: String)
 
-object Warehouse {
-
-}
+object Warehouse {}
 
 
 case class StockItem(id: Long, productId: Long, warehouseId: Long, quantity: Long)

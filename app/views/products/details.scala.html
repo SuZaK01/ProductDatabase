@@ -1,7 +1,7 @@
 @import model.Product
 @(product: Product)(implicit messages: Messages,flash: play.api.mvc.Flash)
 
-@first(Messages("product.details", product.name)) {
+@main(Messages("product.details", product.name)) {
     <h2>@tags.barcode(product.ean)
         @Messages("product.details", product.name)
     </h2>
