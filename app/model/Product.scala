@@ -23,15 +23,6 @@ object Product {
     products = products + product
   }
 
-  //  lazy val productsSlick = TableQuery[Product]
-
-  /*  val setup = DBIO.seq(
-      productsSlick ++= (
-        (5010255079763L, "Paperclips Large","Large Plain Pack of 1000"),
-        (5018206244666L, "Giant Paperclips", "Giant Plain 51mm 100 pack")
-    )*/
-
-
   var products = Set(
     Product(5010255079763L, "Paperclips Large",
       "Large Plain Pack of 1000"),

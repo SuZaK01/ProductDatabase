@@ -1,0 +1,10 @@
+**Build**
+to build the docker image run:
+
+`docker build -t postgres .`
+
+
+**Running local postgres image**
+to run it locally:
+
+`docker run --rm -it -p 5432:5432 postgres`

@@ -13,29 +13,33 @@ import scala.concurrent.Future
 /**
   * Created by lukasz on 05.08.16.
   */
-class ProductDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
+class ProductDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
+  extends HasDatabaseConfigProvider[JdbcProfile] {
+
   lazy val Products = TableQuery[ProductTable]
 
   import driver.api._
 
-
   class ProductTable(tag: Tag) extends Table[Product](tag, "products") {
-    def ean = column[Long]("EAN", O.PrimaryKey, O.AutoInc)
+    def ean = column[Long]("ean", O.PrimaryKey, O.AutoInc)
 
-    def name = column[String]("NAME")
+    def name = column[String]("name")
 
-    def desc = column[String]("DESC")
+    def desc = column[String]("descr")
 
     def * = (ean, name, desc) <> (Product.tupled, Product.unapply)
   }
 
-  def all(): Future[Seq[Product]]  = db.run(Products.result)
+
+  def findByEan(ean: Long) = ""
+
+  def all(): Future[Seq[Product]] = db.run(Products.result)
 
   def insert(product: Product): Future[Unit] = db.run(Products += product) map (_ => ())
 
   def delete(product: Product): Future[Unit] =
     db.run(Products filter (_.ean === product.ean) delete).
-      map (_=> ())
+      map(_ => ())
 
 
 }

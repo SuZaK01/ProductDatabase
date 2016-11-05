@@ -2,6 +2,9 @@ package controllers
 
 import javax.inject._
 
+import akka.stream.scaladsl.FileIO
+import akka.util.ByteString
+import play.api.http.HttpEntity
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
@@ -26,5 +29,17 @@ class HomeController @Inject()(val messagesApi: MessagesApi) extends Controller 
   def hello(name: String) = Action { implicit  req =>
     Ok(s"Hello! $name")
   }
+
+  def echo = Action {
+    Result (
+      header = ResponseHeader(217, Map.empty),
+      body = HttpEntity.Strict(ByteString("Hello world!"), Some("text/plain"))
+    )
+  }
+
+  def notfound = Action { Redirect("/", METHOD_NOT_ALLOWED) }
+
+  val pageNotFound = NotFound(<h1>Page not found!</h1>)
+
 
 }

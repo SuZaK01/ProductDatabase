@@ -11,7 +11,7 @@ scalaVersion := "2.11.8"
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 libraryDependencies ++= Seq(
-//  jdbc,
+  //  jdbc,
   cache,
   ws,
   "org.webjars" %% "webjars-play" % "2.5.0",
@@ -28,11 +28,15 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "2.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0",
   "com.h2database" % "h2" % "1.4.192",
+  "org.postgresql" % "postgresql" % "9.3-1102-jdbc41",
 
 
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )
 
 JsEngineKeys.engineType := JsEngineKeys.EngineType.Node
+
+//DI
+routesGenerator := StaticRoutesGenerator
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
