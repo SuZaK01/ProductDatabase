@@ -1,8 +1,5 @@
 package model
 
-import slick.driver.H2Driver.api._
-import slick.lifted.Tag
-
 
 /**
   * Created by lukasz on 19.07.16.
@@ -12,8 +9,6 @@ case class Product(ean: Long,
                    desc: String) {
 
 }
-
-
 
 
 object Product {

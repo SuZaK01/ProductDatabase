@@ -3,24 +3,16 @@ package controllers
 import javax.inject.Inject
 
 import model.Product
-import play.api.Play
+import model.dao.ProductDAO
 import play.api.data.{Form, Forms}
-import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc.{Action, Controller, Flash}
-import play.db.NamedDatabase
-import slick.driver.JdbcProfile
-
 
 /**
   * Created by lukasz on 19.07.16.
   */
-
-/*
-class ProductController @Inject()(val messagesApi: MessagesApi, val dbConfigProvider: DatabaseConfigProvider)
-  extends Controller with I18nSupport {*/
-
-class ProductController @Inject()(val messagesApi: MessagesApi)
+class ProductController @Inject()(productDAO: ProductDAO, val messagesApi: MessagesApi)
   extends Controller with I18nSupport {
 
 
@@ -32,15 +24,14 @@ class ProductController @Inject()(val messagesApi: MessagesApi)
     )(Product.apply)(Product.unapply)
   )
 
-  def listOfProds = Action { implicit req =>
-    val list = Product.findAll
-    Ok(views.html.list(list))
+  def listOfProds = Action.async { implicit req =>
+    productDAO.all().map { case products => Ok(views.html.list(products)) }
   }
 
-  def show(ean: Long) = Action { implicit req =>
-    Product.findByEan(ean) map { product =>
-      Ok(views.html.products.details(product))
-    } getOrElse (NotFound)
+  def show(ean: Long) = Action.async { implicit req =>
+    productDAO.findByEan(ean) map { case product =>
+      Ok(views.html.products.details(product.head))
+    }
   }
 
   def newProduct = Action { implicit req => {

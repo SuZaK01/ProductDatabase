@@ -32,6 +32,11 @@ class ClientController @Inject()(productDAO: ProductDAO, val messagesApi: Messag
     productDAO.insert(product).map(_ => Redirect(routes.ProductController.listOfProds()))
   }
 
+//  def innyController() = Action.async{ implicit request =>
+//    productDAO.all().filter(_.name === "cos").map{ Ok("jakiś napis coś niewiadomo przesyłający") }
+//
+//  }
+
   //  def index(name: String)  = Action.async{ implicit request =>
   //    val resultingUsers = dbConfig.db.run("select h2version() from dual")
   //    resultingUsers.map(users => Ok("test"))

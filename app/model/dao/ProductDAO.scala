@@ -6,8 +6,8 @@ import model.Product
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.driver.JdbcProfile
 import slick.lifted.TableQuery
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 /**
@@ -31,7 +31,7 @@ class ProductDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvide
   }
 
 
-  def findByEan(ean: Long) = ""
+  def findByEan(ean: Long): Future[Seq[Product]] = db.run(Products.filter(_.ean === ean).result)
 
   def all(): Future[Seq[Product]] = db.run(Products.result)
 

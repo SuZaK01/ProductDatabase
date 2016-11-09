@@ -22,10 +22,20 @@ POST        /products             @controllers.ProductController.save
 
 GET         /barcode/:id          @controllers.Barcode.barcode(id: Long)
 
-GET         /slick/showall         @controllers.ClientController.showAllProducts()
+GET         /slick/showall        @controllers.ClientController.showAllProducts()
 GET         /slick/insert         @controllers.ClientController.insertProducts()
 
+#Albums
+GET         /albums               @controllers.AlbumController.showAlbums()
+POST        /albums/create        @controllers.AlbumController.createData
+GET         /albumsnew            @controllers.AlbumController.selAlbumsArtists
+GET         /albumsnew2           @controllers.AlbumController.selectAlbumArtistExplicitly
 
+#GET         /album/:authorName                       @controllers.AlbumController.showAlbumWithAuthor(authorName: String)
+#GET         /albumsafter                             @controllers.AlbumController.albumsReleasedAfter1990WithNotBad()
+#GET         /updatecatshits                          @controllers.AlbumController.updateCatsHits()
+#GET         /insertpinkfloyd                         @controllers.AlbumController.insertPinkFloyd
+#GET         /insertalbum/:artist/:title/:year        @controllers.AlbumController.newAlbumInsert(artist: String, title: String, year: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file         @controllers.Assets.versioned(path="/public", file: Asset)
