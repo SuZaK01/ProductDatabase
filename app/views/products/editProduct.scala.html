@@ -1,22 +1,22 @@
 @import model.Product
 @(productForm: Form[Product])(implicit messages: Messages, flash: play.api.mvc.Flash)
 
-@import b3.vertical.fieldConstructor
+    @import b3.vertical.fieldConstructor
 
-@first(Messages("product.new.command")) {
+    @main(Messages("product.new.command")) {
 
-    @b3.form(action = routes.ProductController.save()) {
-        <fieldset>
-            <legend>
-            @Messages("product.details", Messages("product.new.command"))
-            </legend>
-            @b3.number(productForm("ean"))
-            @b3.text(productForm("name"))
-            @b3.textarea(productForm("desc"))
-            @b3.submit('class -> "btn btn-default") {
-                @Messages("product.new.submit")
-            }
-        </fieldset>
+        @b3.form(action = routes.ProductController.save()) {
+            <fieldset>
+                <legend>
+                @Messages("product.details", Messages("product.new.command"))
+                </legend>
+                @b3.number(productForm("ean"), '_label -> Messages("product.id"))
+                @b3.text(productForm("name"), '_label -> Messages("product.name"))
+                @b3.textarea(productForm("desc"), '_label -> Messages("product.desc"))
+                @b3.submit('class -> "btn btn-default") {
+                    @Messages("product.new.submit")
+                }
+            </fieldset>
 
+        }
     }
-}

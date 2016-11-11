@@ -1,7 +1,7 @@
 @import model.Product
 @(products: Seq[Product])(implicit messages: Messages, flash: play.api.mvc.Flash)
 
-@main(Messages("application.name")){
+@main(Messages("application.name")) {
 
     <table class="table table-striped">
         <thead>
@@ -10,14 +10,17 @@
             <th>Description</th>
         </thead>
         <tbody>
-            @for(product<- products){
-                <tr>
-                    <td><a href="@routes.ProductController.show(product.ean)">@product.ean</a></td>
-                    <td>@product.name</td>
-                    <td>@product.desc</td>
-                </tr>
-            }
+        @for(product <- products) {
+            <tr>
+                <td><a href="@routes.ProductController.showExisting(product.ean)">@product.ean</a></td>
+                <td>@product.name</td>
+                <td>@product.desc</td>
+            </tr>
+        }
         </tbody>
     </table>
-    <input type="button" class="btn btn-primary" value="cos" href="@routes.ProductController.newProduct()">
+    <a href="@routes.ProductController.newProduct()">
+        <input type="button" class="btn btn-primary" value=@Messages("application.new")>
+    </a>
+
 }

@@ -33,12 +33,14 @@ class ProductDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvide
 
   def findByEan(ean: Long): Future[Seq[Product]] = db.run(Products.filter(_.ean === ean).result)
 
-  def all(): Future[Seq[Product]] = db.run(Products.result)
+  def findByName(name: String): Future[Seq[Product]] = db.run(Products.filter(_.name === name).result)
+
+  def findAll(): Future[Seq[Product]] = db.run(Products.sortBy(_.name.asc).result)
 
   def insert(product: Product): Future[Unit] = db.run(Products += product) map (_ => ())
 
   def delete(product: Product): Future[Unit] =
-    db.run(Products filter (_.ean === product.ean) delete).
+    db.run(Products.filter(_.ean === product.ean).delete).
       map(_ => ())
 
 

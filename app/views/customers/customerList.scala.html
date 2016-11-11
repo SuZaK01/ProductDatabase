@@ -1,0 +1,25 @@
+@import model.Customer
+@(customers: Seq[Customer])(implicit messages: Messages,flash: Flash)
+
+
+@*<h3>@customers.firstName @customer.lastName zamówił:</h3>*@
+
+@main("Customers") {
+
+        <table class="table table-striped">
+            <thead>
+                <th>Nazwa</th>
+                <th>Opis</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>nazwa</td>
+                    <td>opis</td>
+                </tr>
+
+            </tbody>
+        </table>
+    <a href="@routes.ProductController.newProduct()">
+        <input type="button" class="btn btn-primary" value=@Messages("application.new")>
+    </a>
+}

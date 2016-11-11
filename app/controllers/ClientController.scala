@@ -23,7 +23,7 @@ class ClientController @Inject()(productDAO: ProductDAO, val messagesApi: Messag
   }
 
   def showAllProducts() = Action.async { implicit req =>
-    productDAO.all().map{ case products => Ok(views.html.index(products.toString())) }
+    productDAO.findAll().map{ case products => Ok(views.html.index(products.toString())) }
   }
 
   def insertProducts() = Action.async { implicit req =>

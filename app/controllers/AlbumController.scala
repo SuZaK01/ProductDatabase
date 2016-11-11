@@ -25,7 +25,7 @@ class AlbumController @Inject()(albumDAO: AlbumDAO) extends Controller {
   }
 
   def selectAlbumArtistExplicitly() = Action.async{implicit req =>
-    albumDAO.selectAlbumsArtistActionExplicit.map{ seq => Ok(seq.to[List].toString)}
+    albumDAO.selectAlbumsArtistActionExplicit.map{ (seq: Seq[(Artist, Album)]) => Ok(seq.to[List].toString)}
   }
 
   /*

@@ -18,18 +18,25 @@ class ProductController @Inject()(productDAO: ProductDAO, val messagesApi: Messa
 
   private val productForm: Form[Product] = Form(
     Forms.mapping(
-      "ean" -> Forms.longNumber.verifying("Duplicate", Product.findByEan(_).isEmpty),
+      "ean" -> Forms.longNumber,
       "name" -> Forms.nonEmptyText,
       "desc" -> Forms.nonEmptyText
     )(Product.apply)(Product.unapply)
   )
 
   def listOfProds = Action.async { implicit req =>
-    productDAO.all().map { case products => Ok(views.html.list(products)) }
+    productDAO.findAll().map { case products => Ok(views.html.list(products)) }
   }
 
-  def show(ean: Long) = Action.async { implicit req =>
+  def showExisting(ean: Long) = Action.async { implicit req =>
     productDAO.findByEan(ean) map { case product =>
+      Ok(views.html.products.details(product.head))
+    //case _ => Redirect(routes.ProductController.listOfProds())
+    }
+  }
+
+  def showNew(name: String) = Action.async{implicit  req =>
+    productDAO.findByName(name) map { product =>
       Ok(views.html.products.details(product.head))
     }
   }
@@ -46,9 +53,9 @@ class ProductController @Inject()(productDAO: ProductDAO, val messagesApi: Messa
     newProductForm.fold(
       hasErrors = form => Redirect(routes.ProductController.newProduct()).flashing(Flash(form.data) + ("error" -> Messages("validation.error"))),
       success = { newProduct =>
-        Product.add(newProduct)
+        productDAO.insert(newProduct)
         val message = Messages("product.new.success") + ": " + newProduct.name
-        Redirect(routes.ProductController.show(newProduct.ean)).flashing("success" -> message)
+        Redirect(routes.ProductController.showNew(newProduct.name)).flashing("success" -> message)
       }
     )
   }

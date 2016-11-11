@@ -41,5 +41,8 @@ class HomeController @Inject()(val messagesApi: MessagesApi) extends Controller 
 
   val pageNotFound = NotFound(<h1>Page not found!</h1>)
 
+  def check() = Action{
+    Ok("OK")
+  }
 
 }

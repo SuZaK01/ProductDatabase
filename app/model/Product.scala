@@ -4,7 +4,7 @@ package model
 /**
   * Created by lukasz on 19.07.16.
   */
-case class Product(ean: Long,
+case class Product(ean: Long=0L,
                    name: String,
                    desc: String) {
 
@@ -12,7 +12,7 @@ case class Product(ean: Long,
 
 
 object Product {
-  def findByEan(ean: Long) = products.find(_.ean == ean)
+/*  def findByEan(ean: Long) = products.find(_.ean == ean)
 
   def add(product: Product): Unit = {
     products = products + product
@@ -31,7 +31,7 @@ object Product {
       "Zebra Length 28mm Assorted 150 Pack")
   )
 
-  def findAll = products.toList.sortBy(_.ean)
+  def findAll = products.toList.sortBy(_.ean)*/
 
   def tupled = (Product.apply _).tupled
 }

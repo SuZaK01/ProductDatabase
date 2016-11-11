@@ -3,33 +3,42 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                     @controllers.HomeController.index2
-GET         /name                 @controllers.HomeController.hello(name: String)
-GET         /echo                 @controllers.HomeController.echo
-GET         /notfound             @controllers.HomeController.notfound
+GET           /                          @controllers.HomeController.index2
+GET           /check                     @controllers.HomeController.check
+GET           /name                      @controllers.HomeController.hello(name: String)
+GET           /echo                      @controllers.HomeController.echo
+GET           /notfound                  @controllers.HomeController.notfound
+
+#Users
+GET           /users                     @controllers.UserController.userList
+POST          /users                     @controllers.UserController.addUser
+DELETE        /users/:id                 @controllers.UserController.deleteUser(id: Long)
 
 # client
-GET         /clients/:id          @controllers.ClientController.show(id: Long)
+GET           /clients/:id               @controllers.ClientController.show(id: Long)
 
-GET         /about                @controllers.Default.redirect(to = "http://www.onet.pl")
+GET           /about                     @controllers.Default.redirect(to = "http://www.onet.pl")
+
+#Customers
+GET           /customers                 @controllers.CustomerController.showAll
 
 #products
-GET         /products             @controllers.ProductController.listOfProds
-GET         /product/:ean         @controllers.ProductController.show(ean: Long)
+GET           /products                  @controllers.ProductController.listOfProds
+GET           /product/id/:ean           @controllers.ProductController.showExisting(ean: Long)
+GET           /product/name/:name        @controllers.ProductController.showNew(name: String)
 
-GET         /products/new         @controllers.ProductController.newProduct()
-POST        /products             @controllers.ProductController.save
+GET           /products/new              @controllers.ProductController.newProduct()
+POST          /products                  @controllers.ProductController.save
+GET           /barcode/:id               @controllers.Barcode.barcode(id: Long)
 
-GET         /barcode/:id          @controllers.Barcode.barcode(id: Long)
-
-GET         /slick/showall        @controllers.ClientController.showAllProducts()
-GET         /slick/insert         @controllers.ClientController.insertProducts()
-
+#slick
+GET           /slick/showall             @controllers.ClientController.showAllProducts()
+GET           /slick/insert              @controllers.ClientController.insertProducts()
 #Albums
-GET         /albums               @controllers.AlbumController.showAlbums()
-POST        /albums/create        @controllers.AlbumController.createData
-GET         /albumsnew            @controllers.AlbumController.selAlbumsArtists
-GET         /albumsnew2           @controllers.AlbumController.selectAlbumArtistExplicitly
+GET           /albums                    @controllers.AlbumController.showAlbums()
+POST          /albums/create             @controllers.AlbumController.createData
+GET           /albumsnew                 @controllers.AlbumController.selAlbumsArtists
+GET           /albumsnew2                @controllers.AlbumController.selectAlbumArtistExplicitly
 
 #GET         /album/:authorName                       @controllers.AlbumController.showAlbumWithAuthor(authorName: String)
 #GET         /albumsafter                             @controllers.AlbumController.albumsReleasedAfter1990WithNotBad()
@@ -38,5 +47,5 @@ GET         /albumsnew2           @controllers.AlbumController.selectAlbumArtist
 #GET         /insertalbum/:artist/:title/:year        @controllers.AlbumController.newAlbumInsert(artist: String, title: String, year: Int)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         @controllers.Assets.versioned(path="/public", file: Asset)
-GET         /webjars/*file        @controllers.WebJarAssets.at(file)
+GET           /assets/*file              @controllers.Assets.versioned(path="/public", file: Asset)
+GET           /webjars/*file             @controllers.WebJarAssets.at(file)

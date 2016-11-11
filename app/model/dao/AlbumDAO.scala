@@ -66,14 +66,28 @@ class AlbumDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
 
   def insertAllAction = db.run {
     for {
-      keyboardCatId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Keyboard Cat")
-      spiceGirlsId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Spice Girls")
+      rollingStonesId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Rolling Stones")
+      burzumId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Burzum")
+      michaelJacksonId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Michael Jackson")
       _ <- AlbumTable ++= Seq(
-        Album(keyboardCatId, "Keyboard Cat's Greatests Hits", 2009, Rating.Awesome),
-        Album(spiceGirlsId, "SpiceGirls hgraetest hits", 2008, Rating.NotBad)
+        Album(rollingStonesId, "Rolling Stones Greatests Hits",1987, Rating.Awesome),
+        Album(burzumId, "Det Some Engang War", 1995, Rating.Good),
+        Album(michaelJacksonId, "Stranger in the Moscow", 1998, Rating.Awesome)
       )
     } yield ()
   }
+
+
+  /*  def insertAllAction = db.run {
+      for {
+        keyboardCatId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Keyboard Cat")
+        spiceGirlsId <- ArtistTable returning ArtistTable.map(_.id) += Artist("Spice Girls")
+        _ <- AlbumTable ++= Seq(
+          Album(keyboardCatId, "Keyboard Cat's Greatests Hits", 2009, Rating.Awesome),
+          Album(spiceGirlsId, "SpiceGirls hgraetest hits", 2008, Rating.NotBad)
+        )
+      } yield ()
+    }*/
 
   /*  def selectSpiceGirls(authorName: String) = db.run(AlbumTable.filter(_.artist === authorName).result)
 
