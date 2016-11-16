@@ -1,0 +1,20 @@
+@import b3.vertical.fieldConstructor
+@import model.UserData
+@(user: UserData)(userDataForm: Form[UserData])(implicit messages: Messages, flash: Flash)
+
+
+@main("edit user") {
+    @b3.form(action = routes.UserController.addUser) {
+        <fieldset>
+            @b3.text(userDataForm("email"), '_label -> "Email address")
+            @b3.text(userDataForm("firstName"), '_label -> "First name")
+            @b3.text(userDataForm("lastName"), '_label -> "Last name")
+        </fieldset>
+
+        @b3.free('_id -> "idFormGroup") {
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
+            <a class="btn btn-default"> <span class="glyphicon glyphicon-remove"></span> Cancel</a>
+        }
+    }
+
+}

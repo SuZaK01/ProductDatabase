@@ -39,6 +39,7 @@ class ProductDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvide
 
   def insert(product: Product): Future[Unit] = db.run(Products += product) map (_ => ())
 
+
   def delete(product: Product): Future[Unit] =
     db.run(Products.filter(_.ean === product.ean).delete).
       map(_ => ())

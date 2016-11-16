@@ -33,10 +33,11 @@ libraryDependencies ++= Seq(
 
   "com.h2database" % "h2" % "1.4.192",
   "org.postgresql" % "postgresql" % "9.3-1102-jdbc41",
+  // logging
+  "ch.qos.logback" % "logback-classic" % "1.1.3",
 
   // 22 tuples restriction
 //  "com.github.xuwei-k" %% "play-twenty-three" % "0.2.0",
-
 
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )

@@ -12,6 +12,7 @@ GET           /notfound                  @controllers.HomeController.notfound
 #Users
 GET           /users                     @controllers.UserController.userList
 POST          /users                     @controllers.UserController.addUser
+GET           /users/:id                 @controllers.UserController.editUser(id: Long)
 DELETE        /users/:id                 @controllers.UserController.deleteUser(id: Long)
 
 # client

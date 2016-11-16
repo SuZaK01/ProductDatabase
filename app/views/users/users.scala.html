@@ -3,42 +3,45 @@
 @(users: Seq[UserData])(userDataForm: Form[UserData])(implicit messages: Messages, flash: Flash)
 
 
-@main("Manage users"){
+@main("Manage users") {
 
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for(user <- users) {
-                                <tr>
-                                    <td>@user.id</td>
-                                    <td>@user.firstName</td>
-                                    <td>@user.lastName</td>
-                                    <td>@user.email</td>
-                                    <td><a onclick="javascript:del('@routes.UserController.deleteUser(user.id.getOrElse(0))')"><i class="button btn">Delete</i></a></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                    <h3>Add user</h3>
-
-                    @b3.form(action = routes.UserController.addUser){
-                        @b3.text(userDataForm("email"), '_label-> "Email address *")
-                        @b3.text(userDataForm("firstName"), '_label-> "First name")
-                        @b3.text(userDataForm("lastName"), '_label-> "Last name")
-                        @b3.submit('class -> "btn btn-primary"){ <span class="glyphicon glyphicon-ok"></span> Add new user }
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(user <- users) {
+                        <tr>
+                            <td>@user.id</td>
+                            <td>@user.firstName</td>
+                            <td>@user.lastName</td>
+                            <td>@user.email</td>
+                            <td><a onclick="javascript:del('@routes.UserController.deleteUser(user.id.getOrElse(0))')"><i class="button btn">Delete</i></a></td>
+                        </tr>
                     }
-                </div>
+                    </tbody>
+                </table>
+
+                <h3>Add user</h3>
+
+                @b3.form(action = routes.UserController.addUser) {
+                    <fieldset>
+                        @b3.text(userDataForm("email"), '_label -> "Email address *")
+                        @b3.text(userDataForm("firstName"), '_label -> "First name")
+                        @b3.text(userDataForm("lastName"), '_label -> "Last name")
+                    </fieldset>
+                    @b3.submit('class -> "btn btn-primary") {
+                        <span class="glyphicon glyphicon-ok"></span> Add new user }
+                }
             </div>
         </div>
+    </div>
 }
