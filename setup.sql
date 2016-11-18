@@ -4,7 +4,7 @@ CREATE TABLE products (
   desc TEXT NOT NULL
 );
 
-INSERT INTO products (EAN, name, descr) VALUES (5010255079763, 'Paperclips Large', 'Large Plain Pack of 1000');
+INSERT INTO prducts (EAN, name, descr) VALUES (5010255079763, 'Paperclips Large', 'Large Plain Pack of 1000');
 INSERT INTO products (EAN, name, descr) VALUES (5018206244666, 'Giant Paperclips', 'Giant Plain 51mm 100 pack');
 INSERT INTO products (EAN, name, descr) VALUES (5018306332812, 'Paperclip Giant Plain', 'Giant Plain Pack of 10000');
 INSERT INTO products (EAN, name, descr)
